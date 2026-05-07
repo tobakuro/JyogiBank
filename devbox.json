@@ -1,0 +1,14 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetpack-io/devbox/0.10.0/.schema/devbox.schema.json",
+  "packages": [
+    "nodejs@22",
+    "nodePackages.npm@latest"
+  ],
+  "shell": {
+    "scripts": {
+      "setup:bot": "cd bot && npm install",
+      "setup:web": "cd web && npm install",
+      "setup": "devbox run setup:bot && devbox run setup:web"
+    }
+  }
+}

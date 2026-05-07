@@ -1,0 +1,25 @@
+# 環境変数
+.env
+bot/.env
+web/.env
+
+# 依存パッケージ
+node_modules/
+bot/node_modules/
+web/node_modules/
+
+# ビルド成果物
+bot/dist/
+web/.next/
+
+# DB（開発用SQLite）
+bot/*.db
+bot/*.db-journal
+
+# ログ
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
