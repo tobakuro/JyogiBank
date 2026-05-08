@@ -1,0 +1,54 @@
+name: CI (web)
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - "web/**"
+      - ".github/workflows/ci-web.yml"
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - "web/**"
+      - ".github/workflows/ci-web.yml"
+
+defaults:
+  run:
+    working-directory: web
+
+jobs:
+  lint-typecheck-build:
+    name: Lint, Type Check & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+        env:
+          # ビルド時はダミー値でOK（実際の値は本番環境の Secrets で管理）
+          NEXTAUTH_SECRET: dummy-secret-for-ci
+          NEXTAUTH_URL: http://localhost:3000
+          DISCORD_CLIENT_ID: dummy
+          DISCORD_CLIENT_SECRET: dummy
+          JYOGIBANK_API_URL: http://localhost:3001
+          JYOGIBANK_API_KEY: dummy
