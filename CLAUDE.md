@@ -1,5 +1,3 @@
-# jyogibank プロジェクトルール
-
 ## アーキテクチャ
 - DB操作は必ず `services/` 層を経由する（コマンド・ルートから `prisma` を直接呼ばない）
 - bot の HTTP API（`api/`）と Discord コマンド（`bot/commands/`）でロジックを重複させない（共通処理は `services/` に切り出す）
